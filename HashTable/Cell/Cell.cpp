@@ -6,6 +6,9 @@
 #include <string>
 
 using namespace std;
+
+
+//Constructor
 Cell::Cell(string word)
 {
     this->word=word;

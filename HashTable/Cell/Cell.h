@@ -8,6 +8,9 @@
 
 using namespace std;
 
+//This class was used to create Cell objects that were
+//later would be used as HashTable Entries
+
 class Cell
 {
     public:

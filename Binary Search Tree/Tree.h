@@ -20,8 +20,6 @@ class Tree
         friend void inorder(Tree *root);
 
         string getValue() {return value;}
-        Tree* getLeft(){return Left;}
-        Tree* getRight(){return Right;}
         int getDuplicates() {return duplicates;}
 
     private:

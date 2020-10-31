@@ -8,16 +8,20 @@
 using namespace std;
 
 
-Avl* insert_avl(Avl* Avl_node, string word)
+Avl::Avl(string value)
+{
+  this.value = value;
+  Left = NULL;  //creates children
+  Right = NULL;
+  height = 1;   //sets height of new obj to 1
+  duplicates=1; //sets dublicates counter to 1
+}
+
+Avl* Insert_Avl(Avl* Avl_node, string word)
 {
     if (Avl_node == NULL)   //Node is empty
     {
-        Avl* node = new Avl(); //creates a pointer to a new Avl obj
-        node->value = word;  //assigns word to value of obj
-        node->Left = NULL;  //creates children
-        node->Right = NULL;
-        node->height = 1;   //sets height of new obj to 1
-        node->duplicates=1;       //sets dublicates counter to 1
+        Avl* node = new Avl(word); //creates a pointer to a new Avl obj
         return(node);       //returns a pointer to obj that just created
     }
 
@@ -66,21 +70,21 @@ Avl* insert_avl(Avl* Avl_node, string word)
 }
 
 
-Avl* search_avl(Avl* node, string word)
+Avl* Search_Avl(Avl* node, string word)
 {
     if ( node == NULL )
         return node ;                   //Searched through the path of the node and did not find it
     if (node->value == word)
             return node;                       //Found the word
     if (node->value < word)
-       return search_avl(node->Right, word);    //Moving to right child
+       return Search_Avl(node->Right, word);    //Moving to right child
 
-    return search_avl(node->Left, word);        //Moving to left child
+    return Search_Avl(node->Left, word);        //Moving to left child
 }
 
 
 
-Avl* delete_avl(Avl* Avl_node, string word)
+Avl* Delete_Avl(Avl* Avl_node, string word)
 {
 
 
@@ -88,9 +92,9 @@ Avl* delete_avl(Avl* Avl_node, string word)
         return Avl_node;
 
     if ( word < Avl_node->value )       //Moving to the left child
-        Avl_node->Left = delete_avl(Avl_node->Left, word);
+        Avl_node->Left = Delete_Avl(Avl_node->Left, word);
     else if( word > Avl_node->value )   //Moving to the right child
-        Avl_node->Right = delete_avl(Avl_node->Right, word);
+        Avl_node->Right = Delete_Avl(Avl_node->Right, word);
 
     // Found the word i want to delete
     else
@@ -108,7 +112,7 @@ Avl* delete_avl(Avl* Avl_node, string word)
             Avl_node->value = temp->value;
 
             // Delete used most left of right subtree (return deleted subtree to right pointer)
-            Avl_node->Right = delete_avl(Avl_node->Right, temp->value);
+            Avl_node->Right = Delete_Avl(Avl_node->Right, temp->value);
         }
         else //0 or 1 child
         {
@@ -232,4 +236,37 @@ int max(int a, int b)
         return a;
     else
         return b;
+}
+
+
+void postorder(Avl *root)
+{
+    if (root != NULL)
+    {
+        postorder(root->Left);                  // First visiting the left child then the right child and in the end the root
+        postorder(root->Right);
+        cout<<root->value<<endl;
+    }
+}
+
+
+void preorder(Avl *root)
+{
+    if (root != NULL)
+    {
+        cout<<root->value<<endl;
+        preorder(root->Left);                   // First visiting the root then the left child and in the end the right child
+        preorder(root->Right);
+    }
+}
+
+
+void inorder(Avl *root)
+{
+    if (root != NULL)
+    {
+        inorder(root->Left);
+        cout<<root->value<<endl;                // First visiting the left child then the root and in the end the right child
+        inorder(root->Right);
+    }
 }

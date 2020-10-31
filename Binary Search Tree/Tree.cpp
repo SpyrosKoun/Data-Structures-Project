@@ -8,43 +8,39 @@
 using namespace std;
 
 
-
+//Insert function for the BST
 Tree* Insert(Tree* node, string word)
 {
     if (node == NULL)
-            {
-                Tree *node = new Tree();
-                node-> Left = NULL;
-                node-> Right = NULL;
-                node-> value = word;                //Creating a new node and saving the word to value
-                node-> duplicates = 1;
-                return node;
-            }
+        {
+          Tree *node = new Tree();
+          node-> Left = NULL;
+          node-> Right = NULL;
+          node-> value = word;                //Creating a new node and saving the word to value
+          node-> duplicates = 1;
+          return node;
+        }
     else if (node->value == word)
         node-> duplicates++;                        //Increasing duplicates
     else if (word < node->value)
-            node->Left = Insert(node->Left, word);  //Moving to left child
-
+        node->Left = Insert(node->Left, word);  //Moving to left child
     else if (word > node->value)
         node->Right = Insert(node->Right, word);    //Moving to right child
     return node;
 }
 
 
-
+//Search function for the BST
 Tree* Search(Tree* node, string word)
 {
     if ( node == NULL )
         return node ;                   //Searched through the path of the node and did not find it
     if (node->value == word)
-            return node;                       //Found the word
+        return node;                       //Found the word
     if (node->value < word)
        return Search(node->Right, word);    //Moving to right child
-
     return Search(node->Left, word);        //Moving to left child
 }
-
-
 
 
 Tree* Inorder_successor(Tree* node)

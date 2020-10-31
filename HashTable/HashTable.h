@@ -9,7 +9,11 @@
 
 using namespace std;
 
-
+/*
+  For the HashTable we were asked to only implement InsertValue and SearchValue
+  IsEmpty returns if the given HashMap[i] cell is empty
+  PrintHah prints the whole HashTable
+*/
 class HashTable
 {
     public:
@@ -20,7 +24,6 @@ class HashTable
         void SearchValue (string word);
         bool IsEmpty(int i);
         void PrintHash();
-
 
         unsigned long int HashFunction (string word);
 
